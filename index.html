@@ -34,6 +34,9 @@
         </div>
     </nav>
 
+    <!-- Mobile Menu Overlay -->
+    <div class="menu-overlay"></div>
+
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
@@ -135,6 +138,10 @@
                 <div class="about-image">
                     <div class="profile-photo-wrapper">
                         <img src="asset/me.jpeg" alt="Profile Photo" class="profile-photo">
+                        <div class="profile-name-overlay">
+                            <h4>M. Haikal Arif Khairil, S.Kom</h4>
+                            <p>Web Developer</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -292,7 +299,7 @@
                         <div class="demo-label">Demo Project (Simulasi)</div>
                         <img src="asset/furniture-cp.png" alt="Company Profile">
                         <div class="project-overlay">
-                            <a href="https://kalkayu-living.up.railway.app/" class="btn btn-small" target="_blank">Live Demo</a>
+                            <a href="https://kalkayu-living.up.railway.app/" class="btn btn-primary btn-small" target="_blank">Live Demo</a>
                         </div>
                     </div>
                     <div class="project-info">
@@ -310,7 +317,7 @@
                         <div class="demo-label">Demo Project (Simulasi)</div>
                         <img src="asset/casual-lp.png" alt="UMKM Landing">
                         <div class="project-overlay">
-                            <a href="#" class="btn btn-small">Live Demo</a>
+                            <a href="#" class="btn btn-primary btn-small">Live Demo</a>
                         </div>
                     </div>
                     <div class="project-info">
@@ -328,7 +335,7 @@
                         <div class="demo-label">Demo Project (Simulasi)</div>
                         <img src="asset/kuliner-lp.png" alt="School Website">
                         <div class="project-overlay">
-                            <a href="#" class="btn btn-small">Live Demo</a>
+                            <a href="#" class="btn btn-primary btn-small">Live Demo</a>
                         </div>
                     </div>
                     <div class="project-info">
@@ -397,9 +404,10 @@
                 <div class="pricing-card">
                     <div class="pricing-header">
                         <h3>Landing Page</h3>
+                        <p class="price-label">Mulai dari</p>
                         <div class="price">
                             <span class="currency">Rp</span>
-                            <span class="amount">1.000.000</span>
+                            <span class="amount">1.500.000</span>
                         </div>
                     </div>
 
@@ -413,36 +421,14 @@
                         <li><i class="fas fa-check"></i> Garansi Bug 30 Hari</li>
                         <li><i class="fas fa-check"></i> Support minor setelah website launch 14 hari gratis</li>
                     </ul>
-                    <p class="pricing-note">*Domain & hosting tidak termasuk</p>
+                    <p class="pricing-note">Domain & hosting tersedia sebagai add-on (opsional)</p>
                 </div>
 
                 <div class="pricing-card featured">
                     <div class="pricing-badge">Populer</div>
                     <div class="pricing-header">
                         <h3>Company Profile</h3>
-                        <div class="price">
-                            <span class="currency">Rp</span>
-                            <span class="amount">1.500.000</span>
-                        </div>
-                    </div>
-
-                    <a href="#contact" class="btn btn-primary">Konsultasi Gratis</a>
-
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> 5–7 Halaman</li>
-                        <li><i class="fas fa-check"></i> Admin Panel</li>
-                        <li><i class="fas fa-check"></i> SEO Optimized</li>
-                        <li><i class="fas fa-check"></i> Training Admin</li>
-                        <li><i class="fas fa-check"></i> Garansi Bug 30 Hari</li>
-                        <li><i class="fas fa-check"></i> Support minor setelah website launch 14 hari gratis</li>
-                    </ul>
-
-                    <p class="pricing-note">*Domain & hosting tidak termasuk</p>
-                </div>
-
-                <div class="pricing-card">
-                    <div class="pricing-header">
-                        <h3>Company Profile + Maintenance</h3>
+                        <p class="price-label">Mulai dari</p>
                         <div class="price">
                             <span class="currency">Rp</span>
                             <span class="amount">2.000.000</span>
@@ -452,20 +438,107 @@
                     <a href="#contact" class="btn btn-primary">Konsultasi Gratis</a>
 
                     <ul class="pricing-features">
-                        <li><i class="fas fa-check"></i> Semua fitur Company Profile</li>
-                        <li><i class="fas fa-check"></i> 3 Bulan Maintenance</li>
-                        <li><i class="fas fa-check"></i> Priority Support</li>
-                        <li><i class="fas fa-check"></i> Monitoring Performa</li>
+                        <li><i class="fas fa-check"></i> 5–7 Halaman</li>
+                        <li><i class="fas fa-check"></i> Admin Panel</li>
+                        <li><i class="fas fa-check"></i> SEO Optimized</li>
+                        <li><i class="fas fa-check"></i> Panduan Admin</li>
+                        <li><i class="fas fa-check"></i> Garansi Bug 30 Hari</li>
                         <li><i class="fas fa-check"></i> Support minor setelah website launch 14 hari gratis</li>
                     </ul>
 
-                    <p class="pricing-note">Hemat lebih dari Rp 500.000</p>
+                    <p class="pricing-note">Domain & hosting tersedia sebagai add-on (opsional)</p>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Company Profile + Maintenance</h3>
+                        <p class="price-label">Mulai dari</p>
+                        <div class="price">
+                            <span class="currency">Rp</span>
+                            <span class="amount">2.500.000</span>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="btn btn-primary">Konsultasi Gratis</a>
+
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Semua fitur Company Profile</li>
+                        <li><i class="fas fa-check"></i> 3 Bulan Maintenance</li>
+                        <li><i class="fas fa-check"></i> Security Update</li>
+                        <li><i class="fas fa-check"></i> Backup Berkala</li>
+                        <li><i class="fas fa-check"></i> Priority Support</li>
+                        <li><i class="fas fa-check"></i> Monitoring Performa</li>
+                    </ul>
+
+                    <p class="pricing-note">Lebih hemat & lebih aman untuk jangka panjang</p>
                 </div>
             </div>
 
             <div class="maintenance-info">
-                <p><strong>Paket Maintenance tersedia mulai dari Rp 500.000/bulan</strong></p>
+                <p><strong>Paket Maintenance tersedia mulai dari Rp 300.000/bulan</strong></p>
                 <p>Layanan berlangganan untuk update sistem, backup rutin, keamanan, dan support teknis.</p>
+            </div>
+
+            <!-- Add-On Section -->
+            <div class="addon-section">
+                <div class="section-header">
+                    <h3>Add-On Opsional</h3>
+                    <p>Tambahkan layanan sesuai kebutuhan bisnis Anda</p>
+                </div>
+
+                <div class="addon-grid">
+                    <div class="addon-card">
+                        <h4>Domain + Hosting (1 Tahun)</h4>
+                        <p class="addon-price">Rp 1.200.000 / tahun</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Domain .com 1 Tahun</li>
+                            <li><i class="fas fa-check"></i> Hosting + SSL</li>
+                            <li><i class="fas fa-check"></i> Setup & Deployment</li>
+                            <li><i class="fas fa-check"></i> Konfigurasi Email</li>
+                            <li><i class="fas fa-check"></i> Backup Dasar</li>
+                        </ul>
+                    </div>
+
+                    <div class="addon-card">
+                        <h4>Extra Halaman</h4>
+                        <p class="addon-price">Rp 150.000 / halaman</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Desain Konsisten</li>
+                            <li><i class="fas fa-check"></i> Optimasi SEO Dasar</li>
+                        </ul>
+                    </div>
+
+                    <div class="addon-card">
+                        <h4>Maintenance Bulanan</h4>
+                        <p class="addon-price">Mulai Rp 300.000 / bulan</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Update Sistem & Security</li>
+                            <li><i class="fas fa-check"></i> Backup Rutin</li>
+                            <li><i class="fas fa-check"></i> Minor Update Konten</li>
+                            <li><i class="fas fa-check"></i> Monitoring Performa</li>
+                        </ul>
+                    </div>
+
+                    <div class="addon-card">
+                        <h4>Copywriting Profesional</h4>
+                        <p class="addon-price">Rp 500.000</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Struktur Konten Persuasif</li>
+                            <li><i class="fas fa-check"></i> Optimasi Headline</li>
+                            <li><i class="fas fa-check"></i> Call-to-Action Lebih Kuat</li>
+                        </ul>
+                    </div>
+
+                    <!-- <div class="addon-card">
+                        <h4>Integrasi Payment Gateway</h4>
+                        <p class="addon-price">Rp 750.000</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Integrasi Midtrans / Xendit</li>
+                            <li><i class="fas fa-check"></i> Setup Callback & Testing</li>
+                            <li><i class="fas fa-check"></i> Panduan Penggunaan</li>
+                        </ul>
+                    </div> -->
+                </div>
             </div>
 
             <div class="pricing-disclaimer">

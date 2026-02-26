@@ -1,10 +1,37 @@
+// Initialize active state on page load
+document.addEventListener('DOMContentLoaded', () => {
+    // Set home as active by default
+    const homeLink = document.querySelector('.nav-menu a[href="#home"]');
+    if (homeLink) {
+        homeLink.classList.add('active');
+    }
+});
+
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
+const menuOverlay = document.querySelector('.menu-overlay');
 
+// Toggle menu when hamburger clicked
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
+    menuOverlay.classList.toggle('active');
+    
+    // Prevent body scroll when menu is open
+    if (navMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = '';
+    }
+});
+
+// Close menu when clicking on overlay
+menuOverlay.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    navMenu.classList.remove('active');
+    menuOverlay.classList.remove('active');
+    document.body.style.overflow = '';
 });
 
 // Close mobile menu when clicking on a link
@@ -12,6 +39,8 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
     });
 });
 
@@ -25,22 +54,81 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// Active section detection using Intersection Observer (more accurate)
+const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+const sections = document.querySelectorAll('section[id]');
+
+// Create a map of sections that have nav links
+const sectionsWithNavLinks = Array.from(sections).filter(section => {
+    const sectionId = section.getAttribute('id');
+    return Array.from(navLinks).some(link => 
+        link.getAttribute('href') === `#${sectionId}`
+    );
+});
+
+// Intersection Observer for section detection
+const sectionObserverOptions = {
+    root: null,
+    rootMargin: '-20% 0px -70% 0px', // Trigger when section is in middle of viewport
+    threshold: 0
+};
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const sectionId = entry.target.getAttribute('id');
+            
+            // Remove active from all links
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active to corresponding link
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    });
+}, sectionObserverOptions);
+
+// Observe all sections with nav links
+sectionsWithNavLinks.forEach(section => {
+    sectionObserver.observe(section);
+});
+
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        
+        const targetId = this.getAttribute('href');
+        const target = document.querySelector(targetId);
+        
         if (target) {
+            // Smooth scroll to target
             target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
             });
+            
+            // Wait for scroll to complete before updating active state
+            setTimeout(() => {
+                // Remove active class from all nav links
+                document.querySelectorAll('.nav-menu a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+            }, 100);
         }
     });
 });
 
 // Intersection Observer for animations
-const observerOptions = {
+const animationObserverOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
 };
@@ -51,7 +139,7 @@ const observer = new IntersectionObserver((entries) => {
             entry.target.classList.add('fade-in-up');
         }
     });
-}, observerOptions);
+}, animationObserverOptions);
 
 // Observe elements for animation
 document.querySelectorAll('.service-card, .project-card, .testimonial-card, .step, .pricing-card').forEach(el => {
@@ -72,7 +160,7 @@ const skillObserver = new IntersectionObserver((entries) => {
             });
         }
     });
-}, observerOptions);
+}, animationObserverOptions);
 
 const skillsSection = document.querySelector('.skills');
 if (skillsSection) {
