@@ -175,10 +175,11 @@ if (contactForm) {
         
         // Get form data
         const formData = new FormData(this);
-        const formObject = {};
-        formData.forEach((value, key) => {
-            formObject[key] = value;
-        });
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const phone = formData.get('phone');
+        const service = formData.get('service');
+        const message = formData.get('message');
         
         // Simple form validation
         const requiredFields = this.querySelectorAll('[required]');
@@ -194,9 +195,28 @@ if (contactForm) {
         });
         
         if (isValid) {
+            // Build WhatsApp message
+            let whatsappMessage = `🔔 *Pesan Baru dari Website Portfolio*\n\n`;
+            whatsappMessage += `👤 *Nama:* ${name}\n`;
+            whatsappMessage += `📧 *Email:* ${email}\n`;
+            whatsappMessage += `📱 *Telepon:* ${phone}\n`;
+            whatsappMessage += `🛠️ *Layanan:* ${service}\n\n`;
+            whatsappMessage += `💬 *Pesan:*\n${message}`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(whatsappMessage);
+            
+            // Open WhatsApp
+            const whatsappURL = `https://wa.me/62821199045813?text=${encodedMessage}`;
+            window.open(whatsappURL, '_blank');
+            
             // Show success message
-            showNotification('Pesan berhasil dikirim! Saya akan segera menghubungi Anda.', 'success');
-            this.reset();
+            showNotification('Mengarahkan ke WhatsApp...', 'success');
+            
+            // Reset form after short delay
+            setTimeout(() => {
+                this.reset();
+            }, 1000);
         } else {
             showNotification('Mohon lengkapi semua field yang diperlukan.', 'error');
         }
@@ -329,12 +349,14 @@ const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const statNumber = entry.target.querySelector('h4');
-            const targetValue = parseInt(statNumber.textContent);
-            animateCounter(statNumber, targetValue);
-            statsObserver.unobserve(entry.target);
+            if (statNumber) {
+                const targetValue = parseInt(statNumber.textContent);
+                animateCounter(statNumber, targetValue);
+                statsObserver.unobserve(entry.target);
+            }
         }
     });
-}, observerOptions);
+}, animationObserverOptions);
 
 document.querySelectorAll('.stat').forEach(stat => {
     statsObserver.observe(stat);
@@ -521,3 +543,94 @@ setInterval(() => {
     currentTestimonial = (currentTestimonial + 1) % testimonials.length;
     showTestimonial(currentTestimonial);
 }, 5000);
+
+
+// ===== ORDER & WHATSAPP INTEGRATION =====
+const orderButtons = document.querySelectorAll('.order-btn');
+const addonCheckboxes = document.querySelectorAll('.addon-checkbox');
+const addonCards = document.querySelectorAll('.addon-card');
+const whatsappNumber = '6282119904581';
+
+// Format number to Rupiah
+function formatRupiah(number) {
+    return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0
+    }).format(number);
+}
+
+// Handle addon checkbox change
+addonCheckboxes.forEach((checkbox, index) => {
+    checkbox.addEventListener('change', function() {
+        const card = addonCards[index];
+        if (this.checked) {
+            card.classList.add('selected');
+        } else {
+            card.classList.remove('selected');
+        }
+    });
+});
+
+// Handle addon card click (toggle checkbox)
+addonCards.forEach((card, index) => {
+    card.addEventListener('click', function(e) {
+        // Don't toggle if clicking the checkbox itself
+        if (e.target.classList.contains('addon-checkbox') || 
+            e.target.classList.contains('addon-checkbox-label') ||
+            e.target.closest('.addon-checkbox-label')) {
+            return;
+        }
+        
+        const checkbox = addonCheckboxes[index];
+        checkbox.checked = !checkbox.checked;
+        checkbox.dispatchEvent(new Event('change'));
+    });
+});
+
+// Handle order button click
+orderButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const packageName = this.dataset.package;
+        const packagePrice = parseInt(this.dataset.price);
+        
+        // Get selected addons
+        const selectedAddons = [];
+        let totalAddonPrice = 0;
+        
+        addonCheckboxes.forEach((checkbox, index) => {
+            if (checkbox.checked) {
+                const card = addonCards[index];
+                const addonName = card.dataset.addonName;
+                const addonPrice = parseInt(card.dataset.addonPrice);
+                selectedAddons.push({ name: addonName, price: addonPrice });
+                totalAddonPrice += addonPrice;
+            }
+        });
+        
+        // Calculate total
+        const totalPrice = packagePrice + totalAddonPrice;
+        
+        // Build WhatsApp message
+        let message = `Halo, saya tertarik memesan:\n\n`;
+        message += `*Paket:* ${packageName}\n`;
+        message += `*Harga Paket:* ${formatRupiah(packagePrice)}\n`;
+        
+        if (selectedAddons.length > 0) {
+            message += `\n*Add-On yang dipilih:*\n`;
+            selectedAddons.forEach(addon => {
+                message += `✓ ${addon.name} (${formatRupiah(addon.price)})\n`;
+            });
+        }
+        
+        message += `\n*Total Estimasi:* ${formatRupiah(totalPrice)}\n`;
+        message += `\nMohon informasi lebih lanjut. Terima kasih!`;
+        
+        // Encode message for URL
+        const encodedMessage = encodeURIComponent(message);
+        
+        // Open WhatsApp
+        const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+        window.open(whatsappURL, '_blank');
+    });
+});

@@ -844,6 +844,7 @@ p {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
+    margin-bottom: 3rem;
 }
 
 .addon-card {
@@ -852,6 +853,8 @@ p {
     border-radius: 12px;
     padding: 2rem;
     transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
 }
 
 .addon-card:hover {
@@ -860,15 +863,58 @@ p {
     border-color: #00bcd4; /* Cerulean Blue */
 }
 
+.addon-card.selected {
+    border-color: #00bcd4;
+    background: #e0f7fa;
+    box-shadow: 0 8px 30px rgba(0, 188, 212, 0.3);
+}
+
+.addon-checkbox {
+    display: none;
+}
+
+.addon-checkbox-label {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 28px;
+    height: 28px;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.addon-checkbox-label i {
+    color: white;
+    font-size: 0.75rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.addon-checkbox:checked + .addon-checkbox-label {
+    background: #00bcd4;
+    border-color: #00bcd4;
+}
+
+.addon-checkbox:checked + .addon-checkbox-label i {
+    opacity: 1;
+}
+
 .addon-card h4 {
     color: #000000; /* Black */
     margin-bottom: 1rem;
     font-size: 1.2rem;
     min-height: 50px;
+    padding-right: 2.5rem;
 }
 
 .addon-price {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: 600;
     color: #00bcd4; /* Cerulean Blue */
     margin-bottom: 1.5rem;
@@ -891,6 +937,77 @@ p {
     margin-right: 0.75rem;
     margin-top: 0.25rem;
     font-size: 0.9rem;
+}
+
+/* Order Summary */
+.order-summary {
+    background: linear-gradient(135deg, #f8fafc 0%, #e0f7fa 100%);
+    border: 2px solid #00bcd4;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.order-summary h4 {
+    color: #000000;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    color: #475569;
+}
+
+.summary-item span:first-child {
+    font-weight: 500;
+}
+
+.summary-item span:last-child {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    margin-top: 0.5rem;
+    border-top: 2px solid #cbd5e1;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #00bcd4;
+}
+
+#summaryAddons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#summaryAddons .summary-item {
+    padding-left: 1rem;
+    border-left: 3px solid #00bcd4;
 }
 
 /* Skills Section */

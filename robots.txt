@@ -1,0 +1,14 @@
+# robots.txt for haikal-arif.netlify.app
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://haikal-arif.netlify.app/sitemap.xml
+
+# Disallow admin or private directories (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Crawl-delay (optional, in seconds)
+Crawl-delay: 1
