@@ -1291,16 +1291,57 @@ p {
         text-align: center;
         width: 100%;
         max-width: 100%;
+        overflow: hidden;
+    }
+
+    .hero-content {
+        width: 100%;
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
+    .hero-note {
+        word-break: break-word;
+        overflow-wrap: break-word;
     }
 
     .hero-image {
-        display: none;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        width: 100%;
+        max-width: 100%;
     }
-    
-    .hero-content h1 {
-        font-size: 2rem;
-        word-break: break-word;
-        overflow-wrap: break-word;
+
+    .hero-image .hero-card {
+        padding: 1rem 0.5rem;
+    }
+
+    .hero-image .hero-card:nth-child(3) {
+        grid-column: auto;
+    }
+
+    .hero-image .hero-card i {
+        font-size: 1.5rem;
+    }
+
+    .hero-image .hero-card h3 {
+        font-size: 0.75rem;
+        margin-bottom: 0;
     }
     
     .hero-cta {

@@ -362,8 +362,10 @@ document.querySelectorAll('.stat').forEach(stat => {
     statsObserver.observe(stat);
 });
 
-// Parallax effect for hero section
+// Parallax effect for hero section (desktop only)
 window.addEventListener('scroll', () => {
+    if (window.innerWidth <= 768) return; // skip on mobile
+
     const scrolled = window.pageYOffset;
     const heroCards = document.querySelectorAll('.hero-card');
     
