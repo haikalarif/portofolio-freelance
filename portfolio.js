@@ -444,7 +444,7 @@ document.querySelectorAll('.service-card, .project-card, .testimonial-card, .pri
 
 // WhatsApp integration
 function openWhatsApp(message = '') {
-    const phoneNumber = '6281234567890'; // Ganti dengan nomor WhatsApp Anda
+    const phoneNumber = '6282119904581';
     const encodedMessage = encodeURIComponent(message || 'Halo, saya tertarik dengan layanan pembuatan website Anda.');
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
     window.open(whatsappURL, '_blank');
