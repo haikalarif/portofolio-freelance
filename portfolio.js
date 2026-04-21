@@ -362,18 +362,7 @@ document.querySelectorAll('.stat').forEach(stat => {
     statsObserver.observe(stat);
 });
 
-// Parallax effect for hero section (desktop only)
-window.addEventListener('scroll', () => {
-    if (window.innerWidth <= 768) return; // skip on mobile
-
-    const scrolled = window.pageYOffset;
-    const heroCards = document.querySelectorAll('.hero-card');
-    
-    heroCards.forEach((card, index) => {
-        const speed = 0.5 + (index * 0.1);
-        card.style.transform = `translateY(${scrolled * speed}px)`;
-    });
-});
+// Parallax effect removed — caused overflow scroll issues on desktop
 
 // Add loading animation
 // window.addEventListener('load', () => {
