@@ -207,7 +207,7 @@ if (contactForm) {
             const encodedMessage = encodeURIComponent(whatsappMessage);
             
             // Open WhatsApp
-            const whatsappURL = `https://wa.me/62821199045813?text=${encodedMessage}`;
+            const whatsappURL = `https://wa.me/6282119904581?text=${encodedMessage}`;
             window.open(whatsappURL, '_blank');
             
             // Show success message
@@ -516,6 +516,27 @@ document.addEventListener('mousemove', (e) => {
         cursor.style.top = e.clientY + 'px';
     }
 });
+
+// Phone number input — only allow digits, +, -, space
+const phoneInput = document.querySelector('input[name="phone"]');
+if (phoneInput) {
+    phoneInput.addEventListener('keydown', function(e) {
+        const allowed = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', 'Home', 'End', '+', '-', ' '];
+        if (allowed.includes(e.key)) return;
+        if (e.ctrlKey || e.metaKey) return; // allow copy/paste shortcuts
+        if (!/^\d$/.test(e.key)) e.preventDefault();
+    });
+
+    phoneInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^\d+\-\s]/g, '');
+    });
+
+    phoneInput.addEventListener('paste', function(e) {
+        e.preventDefault();
+        const pasted = (e.clipboardData || window.clipboardData).getData('text');
+        this.value = pasted.replace(/[^\d+\-\s]/g, '');
+    });
+}
 
 // Enhanced form interaction
 document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(field => {
